@@ -26,6 +26,17 @@ def get_base_dir() -> Path:
   """
   return get_project_root()
 
+def get_home_dir() -> Path:
+  """Get the home directory of the users computer
+  
+  Returns:
+    Path: home directory path
+    
+  Example:
+    /Users/username/ or ~
+  """
+  return Path.home()
+
 def get_ui_file(filename : str) -> Path:
   """Goes to the ui directory from base
   

@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QMainWindow
 from orbihub.ui.ui_main_window import Ui_MainWindow
 from orbihub.ui.apps_template.apps_frontend import form_apps
 from pathlib import Path
-from orbihub.utils.paths import get_project_root
+from orbihub.utils.paths import get_project_root, get_home_dir
 
 base_dir = get_project_root()
 class MainWindow(QMainWindow, Ui_MainWindow):

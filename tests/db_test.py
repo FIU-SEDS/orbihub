@@ -32,3 +32,16 @@ cursor.executemany("INSERT INTO users (name, email, age) VALUES (?, ?, ?)", user
 # commit changes
 conn.commit()
 
+# Query data
+cursor.execute("SELECT * FROM users WHERE age > ?", (25,))
+results = cursor.fetchall()
+for row in results:
+  print(row)
+  
+# Query with column names
+cursor.execute("SELECT name, email FROM users")
+for row in cursor.fetchall():
+  print(f"Name: {row[0]}, Email: {row[1]}")
+
+#close connection
+conn.close()

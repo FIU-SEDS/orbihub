@@ -4,7 +4,6 @@ from orbihub.ui.apps_template.apps_frontend import form_apps
 from pathlib import Path
 from orbihub.utils.paths import get_project_root
 
-
 base_dir = get_project_root()
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):

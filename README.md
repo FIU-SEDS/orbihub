@@ -46,6 +46,11 @@ Core business logic for app management including installation via git, registry 
 - For utils/ folder:
 Utility functions and helpers for configuration management, logging, validation, and app-wide constants.
 
+## current tasks 2025-11-14
+Tomas: Phase 3 Display Apps in UI
+
+
+## project timeline
 ```bash
 Development Steps (In Order)
 Phase 1: Get Basic UI Working (DONE)
@@ -87,18 +92,16 @@ Step 25: Test on clean machine
 Step 26: Write user documentation
 Step 27: Release to your club!
 
-Your Current Position
+Our Current Position: 2025-11-14
 DONE UI designed
 DONE paths.py written
-Next: Start Phase 1, Step 1 (convert .ui to Python)
-Suggested Work Sessions
+DONE Phase 1
+Next: Start Phase 3 & 4
 
 Session 1: Steps 1-4 (Get window opening)
-Session 2: Steps 5-8 (Database + registry)
-Session 3: Steps 9-12 (Show apps in UI)
-Session 4: Steps 13-17 (Install apps)
-Session 5+: Steps 18-27 (Features + polish)
+Session 2:  (Show apps in UI)
+Session 3:  (Database + registry)
+Session 4:  (Install apps)
+Session 5: (Features + polish)
 
-Focus on completing Phase 1 first. Don't jump ahead!
-Which phase/step are you starting with?
 ```

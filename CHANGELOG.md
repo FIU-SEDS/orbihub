@@ -2,6 +2,15 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.1] - 2025-11-14
+
+### Added 
+- Phase 1: Get Basic UI Working (DONE)
+- .ui file to Python with pyuic6
+- Created MainWindow class that loads the UI
+- Updated main.py to launch the window
+- Tested that window opens and buttons print messages when clicked
+
 ## [0.1.0] - 2025-11-08
 
 ### Added

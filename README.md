@@ -2,7 +2,7 @@
 
 Modular marketplace platform for high-powered rocketry applications. Downloadable apps for telemetry, data analysis, firmware updates, and flight tools.
 
-<p align=center>
+<div align="center">
 
 [![python](https://img.shields.io/badge/Python-3.13-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 
@@ -12,7 +12,7 @@ Modular marketplace platform for high-powered rocketry applications. Downloadabl
 <a href="https://github.com/erielC"><img src="https://img.shields.io/badge/maintainer-erielC-blue"></a>
 <a href="https://github.com/tomasmej"><img src="https://img.shields.io/badge/maintainer-tomasmej-blue"></a>
 
-</p>
+</div>
 
 ## plan
 

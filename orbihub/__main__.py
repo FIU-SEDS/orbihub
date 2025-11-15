@@ -11,11 +11,9 @@ import sys
 
 def main():
     app = QApplication(sys.argv)
-
     window = MainWindow()
     window.show()
-
-    app.exec()
+    sys.exit(app.exec()) # using sys.exit() to preserve integrity of exit status
 
 if __name__ == '__main__':
     main()

@@ -26,6 +26,17 @@ def get_base_dir() -> Path:
   """
   return get_project_root()
 
+def get_home_dir() -> Path:
+  """Get the home directory of the users computer
+  
+  Returns:
+    Path: home directory path
+    
+  Example:
+    /Users/username/ or ~
+  """
+  return Path.home()
+
 def get_ui_file(filename : str) -> Path:
   """Goes to the ui directory from base
   
@@ -36,3 +47,16 @@ def get_ui_file(filename : str) -> Path:
     /Users/username/projects/orbihub/orbihub/ui
   """
   return get_project_root / 'ui' / filename
+
+def get_data_dir() -> Path:
+  data_dir = get_home_dir() / '.orbihub'
+  data_dir.mkdir(parents=True, exist_ok=True)
+  return data_dir
+
+def get_database_file() -> Path:
+  """Get path to SQLite database file
+
+  Returns:
+      Path: Database file path (~/.orbihub/orbihub.db)
+  """
+  return get_data_dir() / 'orbihub.db'

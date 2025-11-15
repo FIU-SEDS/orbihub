@@ -9,6 +9,7 @@ Modular marketplace platform for high-powered rocketry applications. Downloadabl
 <a href="#Linux"><img src="https://img.shields.io/badge/os-linux-brightgreen">
 <a href="#MacOS"><img src="https://img.shields.io/badge/os-mac-brightgreen">
 <a href="#Windows"><img src="https://img.shields.io/badge/os-windows-red">
+
 <a href="https://github.com/erielC"><img src="https://img.shields.io/badge/maintainer-erielC-blue"></a>
 <a href="https://github.com/tomasmej"><img src="https://img.shields.io/badge/maintainer-tomasmej-blue"></a>
 

@@ -1,6 +1,18 @@
 # orbihub
+
 Modular marketplace platform for high-powered rocketry applications. Downloadable apps for telemetry, data analysis, firmware updates, and flight tools.
 
+<p align=center>
+
+[![python](https://img.shields.io/badge/Python-3.13-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+
+<a href="#Linux"><img src="https://img.shields.io/badge/os-linux-brightgreen">
+<a href="#MacOS"><img src="https://img.shields.io/badge/os-mac-brightgreen">
+<a href="#Windows"><img src="https://img.shields.io/badge/os-windows-red">
+<a href="https://github.com/erielC"><img src="https://img.shields.io/badge/maintainer-erielC-blue"></a>
+<a href="https://github.com/tomasmej"><img src="https://img.shields.io/badge/maintainer-tomasmej-blue"></a>
+
+</p>
 
 ## plan
 
@@ -38,19 +50,20 @@ orbihub-project/
 ```
 
 - For ui/ folder:
-PyQt6 user interface components including main marketplace window, app cards, and dialogs. Contains both .ui designer files and generated Python UI code.
+  PyQt6 user interface components including main marketplace window, app cards, and dialogs. Contains both .ui designer files and generated Python UI code.
 
 - For core/ folder:
-Core business logic for app management including installation via git, registry fetching, database operations, and app launching.
+  Core business logic for app management including installation via git, registry fetching, database operations, and app launching.
 
 - For utils/ folder:
-Utility functions and helpers for configuration management, logging, validation, and app-wide constants.
+  Utility functions and helpers for configuration management, logging, validation, and app-wide constants.
 
 ## current tasks 2025-11-14
+
 Tomas: Phase 3 Display Apps in UI
 
-
 ## project timeline
+
 ```bash
 Development Steps (In Order)
 Phase 1: Get Basic UI Working (DONE)

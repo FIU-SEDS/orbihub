@@ -2,8 +2,6 @@ from orbihub.utils.paths import get_database_file
 from typing import List
 import sqlite3
 
-
-
 def init_database():
   db_path = get_database_file() # creates ~/.orbihub/ and returns db path
   conn = sqlite3.connect(db_path) # creates the .db file

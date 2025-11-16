@@ -45,14 +45,14 @@ def add_installed_app(app_id : str, name : str, version : str, repo_url : str):
     conn.commit()
   
 """code for testing database"""
-if __name__ == "__main__":
-  print("Initalizing database...")
-  init_database()
+# if __name__ == "__main__":
+#   print("Initalizing database...")
+#   init_database()
 
-  print("\nAdding test app...")
-  add_installed_app("test-app", "Test App", "1.0.0", "https://github.com/test/app")
+#   print("\nAdding test app...")
+#   add_installed_app("test-app", "Test App", "1.0.0", "https://github.com/test/app")
 
-  print("\nInstalled Apps")
-  apps = get_installed_apps()
-  for app in apps:
-    print(app)
+  # print("\nInstalled Apps")
+  # apps = get_installed_apps()
+  # for app in apps:
+  #   print(app)

@@ -61,8 +61,8 @@ orbihub-project/
 
 ## current tasks 2025-11-14
 
-Tomas: Phase 3 Display Apps in UI
-Eriel: Phase 5 add more background functionality
+- Tomas: Phase 3 Display Apps in UI
+- Eriel: Phase 5 add more background functionality
 
 ## project timeline
 
@@ -112,7 +112,7 @@ DONE UI designed
 DONE paths.py written
 DONE Phase 1
 DONE Phase 2
-DONE Phase 3
+DONE Phase 4
 Next: Start Phase 3 & 5
 
 Session 1: Steps 1-4 (Get window opening)

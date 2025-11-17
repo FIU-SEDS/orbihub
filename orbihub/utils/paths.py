@@ -65,3 +65,14 @@ def get_database_file() -> Path:
       Path: Database file path (~/.orbihub/orbihub.db)
   """
   return get_data_dir() / 'orbihub.db'
+
+def get_logs_dir() -> Path:
+  """Gets the path to the logger directory for application debugging
+  
+  Returns:
+    Path: logger directory
+  """ 
+  logs_dir = get_home_dir() / '.orbihub'
+  # creates the directory if it doesnt exists
+  logs_dir.mkdir(parents=True, exist_ok=True)
+  return logs_dir

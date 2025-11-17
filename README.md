@@ -62,7 +62,7 @@ orbihub-project/
 ## current tasks 2025-11-14
 
 - Tomas: Phase 3 Display Apps in UI
-- Eriel: Phase 5 add more background functionality
+- Eriel: working on logging functionality for app
 
 ## project timeline
 

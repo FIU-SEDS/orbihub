@@ -2,6 +2,20 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.4] - 2025-11-16
+
+### Added
+- Comprehensive logging system with file and console output
+- Logs stored in `~/.orbihub/logs/orbihub.log`
+- Logging for app installation events and errors
+- Logging for database operations
+- Logging for app registry fetching
+- Application startup and initialization logging
+
+### Changed
+- Replaced print statements with structured logging throughout codebase
+- Improved error handling with detailed error logs
+
 ## [0.1.3] - 2025-11-15
 
 ### Added

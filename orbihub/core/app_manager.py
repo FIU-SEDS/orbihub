@@ -1,8 +1,8 @@
 from orbihub.utils.paths import get_apps_dir
 from orbihub.core.database import add_installed_app
 from orbihub.utils.checker import check_python_installed, check_git_installed 
+from orbihub.utils.logger import logger
 from pathlib import Path
-import os
 import platform
 import subprocess
 from typing import Tuple
@@ -17,25 +17,31 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     #git clone
     app_install_path = get_apps_dir() / app_id
     subprocess.run(["git", "clone", repo_url, str(app_install_path)], check=True)
-    print(f"Repo cloned to {apps_dir}")
+    # print(f"Repo cloned to {apps_dir}")
+    logger.info(f"Repo cloned to {app_install_path}")
 
     # create seperate venv for that app
     venv_path = app_install_path / 'venv'
     subprocess.run(["python", "-m", "venv", str(venv_path)], check=True)
+    logger.info("Virtual enviorment created")
 
     # get pip path based on OS
     if platform.system() == 'Windows':
       pip_path = venv_path / 'Scripts' / 'pip'
+      logger.info("System identified as windows")
     else: # UNIX(mac/linux)
       pip_path = venv_path / 'bin' / 'pip'
+      logger.info("System identified as UNIX (mac/linux)")
       
     # install requirements using specific venv's pip
     requirements = app_install_path / 'requirements.txt'
     if requirements.exists():
       subprocess.run([str(pip_path), "install", "-r", str(requirements)], check=True)
+      logger.info("Dependancies installed successfully")
       
     # save to database
     add_installed_app(app_id, name, verison, repo_url)
+    logger.info(f"Installation complete: {app_id}")
 
     return (True, "installation successful")
     
@@ -43,18 +49,18 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     return (False, f"Installation failed {e}")
 
 """testing output"""
-if __name__ == "__main__":
-    # Test with a small repo
-    success, message = install_app(
-        app_id="test-app_manager",
-        name="Test App",
-        verison="1.0.0",
-        repo_url="https://github.com/octocat/Hello-World"  # Small test repo
-    )
+# if __name__ == "__main__":
+#     # Test with a small repo
+#     success, message = install_app(
+#         app_id="test-app_manager",
+#         name="Test App",
+#         verison="1.0.0",
+#         repo_url="https://github.com/octocat/Hello-World"  # Small test repo
+#     )
     
-    print(f"Success: {success}")
-    print(f"Message: {message}")
+#     print(f"Success: {success}")
+#     print(f"Message: {message}")
     
-    # Check if it worked
-    if success:
-        print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+#     # Check if it worked
+#     if success:
+#         print(f"\nCheck: {get_apps_dir() / 'test-app'}")

@@ -1,4 +1,5 @@
 from typing import List
+from orbihub.utils.logger import logger
 
 sample_apps =[
   {
@@ -31,10 +32,11 @@ sample_apps =[
 # function to return apps
 def fetch_registry() -> List:
   # return the list of apps
+  logger.info("Fetching apps in registry")
   return sample_apps
   
-# testing the code
-if __name__ == "__main__":
-  apps_list = fetch_registry()
-  for app in apps_list:
-    print(f"{app['name']}- v{app['version']}\n\t{app['description']}\n")
+# # testing the code
+# if __name__ == "__main__":
+#   apps_list = fetch_registry()
+#   for app in apps_list:
+#     print(f"{app['name']}- v{app['version']}\n\t{app['description']}\n")

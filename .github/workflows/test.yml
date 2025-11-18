@@ -1,0 +1,41 @@
+name: Orbihub CI
+
+on: # when should this run
+  push: # run when push code
+    branches: [main, master, develop] # only on these branches
+  pull_request: # also run on PRs
+    branches: [main, master] 
+
+jobs: # list of tasks to run
+  test: # name of this job
+    runs-on: ${{ matrix.os }} # which OS to use
+    strategy:
+      matrix: # run multiple times of same job with different values 
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.13']
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Test imports
+      run: |
+        python -c "from orbihub.utils.paths import get_data_dir; print(get_data_dir())"
+        python -c "from orbihub.core.database import init_database; init_database()"
+        python -c "from orbihub.core.registry import fetch_registry; print(len(fetch_registry()))"
+    
+    - name: Test database
+      run: python -m orbihub.core.database
+    
+    - name: Test registry
+      run: python -m orbihub.core.registry

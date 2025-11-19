@@ -70,6 +70,7 @@ def remove_installed_apps(app_id : str):
       cursor = conn.cursor()
       cursor.execute("DELETE FROM installed_apps WHERE app_id = ?", (app_id,))
       conn.commit()
+      logger.info(f"Successfully removed app: {app_id}")
   except Exception as e:
     logger.error(f"Error removing application: {e}")
     raise

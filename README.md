@@ -2,6 +2,8 @@
 
 Modular marketplace platform for high-powered rocketry applications. Downloadable apps for telemetry, data analysis, firmware updates, and flight tools.
 
+**Start small. Ship often. Stay focused.**
+
 <div align="center">
 
 [![python](https://img.shields.io/badge/Python-3.13-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)

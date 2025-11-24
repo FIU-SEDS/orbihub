@@ -13,6 +13,11 @@ class Ui_app_template_format(object):
     def setupUi(self, app_template_format):
         app_template_format.setObjectName("app_template_format")
         app_template_format.resize(400, 300)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(app_template_format.sizePolicy().hasHeightForWidth())
+        app_template_format.setSizePolicy(sizePolicy)
         self.gridLayout = QtWidgets.QGridLayout(app_template_format)
         self.gridLayout.setObjectName("gridLayout")
         self.app_image = QtWidgets.QFrame(parent=app_template_format)
@@ -20,6 +25,10 @@ class Ui_app_template_format(object):
         self.app_image.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.app_image.setObjectName("app_image")
         self.gridLayout.addWidget(self.app_image, 0, 0, 1, 3)
+        self.install_button = QtWidgets.QPushButton(parent=app_template_format)
+        self.install_button.setFlat(True)
+        self.install_button.setObjectName("install_button")
+        self.gridLayout.addWidget(self.install_button, 1, 1, 1, 1)
         self.settings_button = QtWidgets.QPushButton(parent=app_template_format)
         self.settings_button.setFlat(True)
         self.settings_button.setObjectName("settings_button")
@@ -33,10 +42,6 @@ class Ui_app_template_format(object):
         self.about_button_3.setFlat(True)
         self.about_button_3.setObjectName("about_button_3")
         self.gridLayout.addWidget(self.about_button_3, 1, 0, 1, 1)
-        self.install_button = QtWidgets.QPushButton(parent=app_template_format)
-        self.install_button.setFlat(True)
-        self.install_button.setObjectName("install_button")
-        self.gridLayout.addWidget(self.install_button, 1, 1, 1, 1)
 
         self.retranslateUi(app_template_format)
         QtCore.QMetaObject.connectSlotsByName(app_template_format)
@@ -44,6 +49,6 @@ class Ui_app_template_format(object):
     def retranslateUi(self, app_template_format):
         _translate = QtCore.QCoreApplication.translate
         app_template_format.setWindowTitle(_translate("app_template_format", "Form"))
+        self.install_button.setText(_translate("app_template_format", "Install"))
         self.settings_button.setText(_translate("app_template_format", "Settings"))
         self.about_button_3.setText(_translate("app_template_format", "About"))
-        self.install_button.setText(_translate("app_template_format", "Install"))

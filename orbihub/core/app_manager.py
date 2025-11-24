@@ -1,5 +1,5 @@
 from orbihub.utils.paths import get_apps_dir
-from orbihub.core.database import add_installed_app
+from orbihub.core.database import add_installed_app, remove_installed_apps
 from orbihub.utils.checker import check_python_installed, check_git_installed 
 from orbihub.utils.logger import logger
 from pathlib import Path
@@ -49,19 +49,40 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
   except subprocess.CalledProcessError as e:
     return (False, f"Installation failed {e}")
   
-  def delete_app_files(app_id: str) -> Tuple[bool, str]:
-    """Deletes app file(s) from marketplace utilizing shutil (shell utilities)"""
-    try: 
-      app_path = get_apps_dir() / app_id
-      #Check if app cannot be found or succesfully already deleted
-      if not app_path.exists():
-        logger.warning(f"App folder not found: {app_path}")
-        return (True, "Folder already deleted")
+def delete_app_files(app_id: str) -> Tuple[bool, str]:
+  """Deletes app file(s) from disk"""
+  try: 
+    app_path = get_apps_dir() / app_id
+    #Check if app cannot be found or succesfully already deleted
+    if not app_path.exists():
+      logger.warning(f"App folder not found: {app_path}")
+      return (True, "Folder already deleted")
       
-      #Removal function using shutil 
-      shutil.rmtree(app_path)
-      logger.info(f"Deleted app files: {app_path}")
-      return(True, "File deletion successful")
+    #Removal function using shutil 
+    shutil.rmtree(app_path)
+    logger.info(f"Deleted app files: {app_path}")
+    return(True, "File deletion successful")
+    
+  #Error log for unsuccessful deletion 
+  except Exception as e:
+    logger.error(f"Failed to delete app files: {e}")
+    return(False, f"Deletction failed: {e}")
+    
+def uninstall_apps(app_id: str) -> Tuple[bool, str]:
+    """Completely uninstall, removing files from disk & database"""
+    try:
+      deletion_successful, files_message = delete_app_files(app_id)
+      if not deletion_successful:
+        return (False, f"File deletion failed: {files_message}")
+        
+    remove_installed_apps(app_id)
+
+     
+
+
+
+    
+
     
       
       #Error check file deletion unsuccessful 

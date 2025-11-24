@@ -53,10 +53,20 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     """Deletes app file(s) from marketplace utilizing shutil (shell utilities)"""
     try: 
       app_path = get_apps_dir() / app_id
-      #Error check if app cannot be found/already deleted
+      #Check if app cannot be found or succesfully already deleted
       if not app_path.exists():
         logger.warning(f"App folder not found: {app_path}")
         return (True, "Folder already deleted")
+      
+      #Removal function using shutil 
+      shutil.rmtree(app_path)
+      logger.info(f"Deleted app files: {app_path}")
+      return(True, "File deletion successful")
+    
+      
+      #Error check file deletion unsuccessful 
+    except Exception as e:
+      logger.error(f"")
 
 """testing output"""
 # if __name__ == "__main__":

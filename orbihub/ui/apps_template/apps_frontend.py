@@ -1,3 +1,4 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
@@ -14,80 +15,55 @@ class form_apps(QWidget, Ui_app_template_format):
     super().__init__()
     self.setupUi(self)
 
-    # styling the app card and buttons alike
+    self.setObjectName("appCard")
+
+    # hidden by default until needed
+    self.progress_bar.setVisible(False)
+            
+    # Style this specific widget
     self.setStyleSheet("""
-    QFrame {
-        background-color: #ECF0F1;
-        border: 1px solid #BDC3C7;
-        border-radius: 10px;
-        padding: 15px;
-    }
-    QFrame:hover {
-        background-color: #E0E6E8;
-        border: 1px solid #95A5A6;
-    }
+        #appCard {
+            background-color: #d5d5d5;
+            border: 2px solid #BDC3C7;
+            border-radius: 10px;
+        }
+        #appCard:hover {
+            background-color: #E0E6E8;
+            border: 2px solid #95A5A6;
+        }
+        QPushButton {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            font-weight: bold;
+        }
+        QPushButton:hover {
+            background-color: #2980B9;
+        }
     """)
+
+    # populate background color
+    self.setAutoFillBackground(True)
+
+   # Create layout for app_image frame
+    image_layout = QVBoxLayout(self.app_image)
+    image_layout.setContentsMargins(0, 0, 0, 0)
     
-    self.install_button.setStyleSheet("""
-    QPushButton {
-        background-color: #3498DB;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        font-weight: bold;
-    }
-    QPushButton:hover {
-        background-color: #2980B9;
-    }
-    QPushButton:pressed {
-        background-color: #21618C;
-    }
-    """)
-
-    self.settings_button.setStyleSheet("""
-    QPushButton {
-        background-color: #3498DB;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        font-weight: bold;
-    }
-    QPushButton:hover {
-        background-color: #2980B9;
-    }
-    QPushButton:pressed {
-        background-color: #21618C;
-    }
-    """)
-
-    self.about_button_3.setStyleSheet("""
-    QPushButton {
-        background-color: #3498DB;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        font-weight: bold;
-    }
-    QPushButton:hover {
-        background-color: #2980B9;
-    }
-    QPushButton:pressed {
-        background-color: #21618C;
-    }
-    """)
-
-
-    image_label = QLabel(parent=self.app_image)
-    image_label.setScaledContents(True)
-    image_label.setGeometry(self.app_image.rect())
+    # Create label
+    self.image_label = QLabel()
+    self.image_label.setScaledContents(True)  # Auto-scale
+    self.image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+    
+    # Load image
     pixmap = QPixmap(image_path)
-    if pixmap.isNull():
-        logger.error(f"Failed to load image: {image_path}")
+    if not pixmap.isNull():
+        self.image_label.setPixmap(pixmap)  # Qt handles scaling
+        logger.info(f"Image loaded: {image_path}")
     else:
-        logger.info(f"Image loaded successfully: {pixmap.size()}")
-    image_label.setPixmap(pixmap) 
-
-
+        self.image_label.setText("No Image")
+        logger.error(f"Failed to load image: {image_path}")
+    
+    # Add label to layout
+    image_layout.addWidget(self.image_label)

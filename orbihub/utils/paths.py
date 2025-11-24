@@ -48,6 +48,9 @@ def get_ui_file(filename : str) -> Path:
   """
   return get_project_root / 'ui' / filename
 
+def get_image_path(filename : str) -> str:
+    return str(get_project_root() / 'assets' / filename)
+
 def get_apps_dir() -> Path:
   apps_dir = get_home_dir() / '.orbihub' / 'apps'
   apps_dir.mkdir(parents=True, exist_ok=True)

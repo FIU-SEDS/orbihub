@@ -2,6 +2,26 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.5] - 2025-11-24
+
+### Added
+- App card UI component with rounded borders and hover effects
+- Image display functionality for app logos in cards
+- Fixed-size app cards (400x350px) with proper image scaling
+- Square image frame (220x220px) for 1:1 aspect ratio logos
+- Styled buttons (About, Install, Settings) with hover states
+- Progress bar component (hidden by default until installation)
+
+### Changed
+- Improved app card styling with background colors and borders
+- Set app cards to fixed size to prevent stretching in grid layout
+- Image scaling now maintains aspect ratio without distortion
+
+### Fixed
+- App card background now properly renders with styled background attribute
+- Images now display at correct proportions (1:1 ratio for square logos)
+- Path handling for app images now uses full paths consistently
+
 ## [0.1.4] - 2025-11-16
 
 ### Added

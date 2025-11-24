@@ -6,6 +6,7 @@ from pathlib import Path
 import platform
 import subprocess
 from typing import Tuple
+import shutil 
 
 apps_dir = get_apps_dir()
 
@@ -47,6 +48,15 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     
   except subprocess.CalledProcessError as e:
     return (False, f"Installation failed {e}")
+  
+  def delete_app_files(app_id: str) -> Tuple[bool, str]:
+    """Deletes app file(s) from marketplace utilizing shutil (shell utilities)"""
+    try: 
+      app_path = get_apps_dir() / app_id
+      #Error check if app cannot be found/already deleted
+      if not app_path.exists():
+        logger.warning(f"App folder not found: {app_path}")
+        return (True, "Folder already deleted")
 
 """testing output"""
 # if __name__ == "__main__":

@@ -77,6 +77,8 @@ def uninstall_apps(app_id: str) -> Tuple[bool, str]:
         
     remove_installed_apps(app_id)
 
+    DELETE
+
      
 
 

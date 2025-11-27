@@ -4,8 +4,10 @@ Calculator Application Main Entry Point
 """
 # from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QIcon
 from orbihub.ui.main_window import MainWindow
 from orbihub.utils.logger import logger
+from orbihub.utils.paths import get_image_path, get_project_root
 import sys
 # from .frontend import main  # Ensure 'frontend' is the correct module where 'main' is defined
 
@@ -13,6 +15,12 @@ import sys
 def main():
     logger.info("Application starting up")
     app = QApplication(sys.argv)
+
+    # Set application icon
+    icon_path = str(get_project_root() / 'assets' / 'orbihub_icon.icns')
+    # icon_path = str(get_image_path('orbihub_icon.icns'))
+    app.setWindowIcon(QIcon(icon_path))  # ← Add this 
+    
     window = MainWindow()
     window.show()
     exit_code = app.exec()

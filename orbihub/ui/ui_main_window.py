@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'main_window.ui'
+# Form implementation generated from reading ui file 'orbihub/ui/main_window.ui'
 #
 # Created by: PyQt6 UI code generator 6.10.0
 #
@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 700)
+        MainWindow.resize(1000, 850)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.titleLabel.setMaximumSize(QtCore.QSize(16777215, 60))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(100)
+        font.setWeight(75)
         self.titleLabel.setFont(font)
         self.titleLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.titleLabel.setObjectName("titleLabel")
@@ -49,15 +49,17 @@ class Ui_MainWindow(object):
         self.settingsButton.setMaximumSize(QtCore.QSize(50, 50))
         self.settingsButton.setObjectName("settingsButton")
         self.sidebarLayout.addWidget(self.settingsButton)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(40, 13, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
         self.sidebarLayout.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.sidebarLayout.addItem(spacerItem1)
         self.horizontalLayout.addLayout(self.sidebarLayout)
         self.scrollArea = QtWidgets.QScrollArea(parent=self.centralwidget)
         self.scrollArea.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 948, 557))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 946, 710))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.appsGrid = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.appsGrid.setContentsMargins(20, 20, 20, 20)
@@ -70,8 +72,8 @@ class Ui_MainWindow(object):
         self.searchLayout.setContentsMargins(10, 10, 10, 10)
         self.searchLayout.setSpacing(10)
         self.searchLayout.setObjectName("searchLayout")
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.searchLayout.addItem(spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.searchLayout.addItem(spacerItem2)
         self.searchLineEdit = QtWidgets.QLineEdit(parent=self.centralwidget)
         self.searchLineEdit.setObjectName("searchLineEdit")
         self.searchLayout.addWidget(self.searchLineEdit)
@@ -81,7 +83,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.searchLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 33))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 30))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(parent=self.menubar)
         self.menuFile.setObjectName("menuFile")

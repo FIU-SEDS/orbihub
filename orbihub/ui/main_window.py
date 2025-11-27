@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QMainWindow, QGridLayout
 from orbihub.ui.ui_main_window import Ui_MainWindow
+from orbihub.ui.styles import AEROSPACE_THEME
 from orbihub.ui.apps_template.apps_frontend import form_apps
 from pathlib import Path
 from orbihub.utils.paths import get_project_root, get_home_dir, get_image_path
@@ -10,6 +11,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.setStyleSheet(AEROSPACE_THEME)
         
         # Connect signals
         self.ui.actionQuit.triggered.connect(self.close)

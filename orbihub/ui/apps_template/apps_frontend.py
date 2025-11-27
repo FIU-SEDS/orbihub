@@ -19,33 +19,71 @@ class form_apps(QWidget, Ui_app_template_format):
 
     # hidden by default until needed
     self.progress_bar.setVisible(False)
+
+    # Force Qt to draw the styled background
+    self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)  # rendering background color for entire widget not just child elements
             
     # Style this specific widget
+    # self.setStyleSheet("""
+    #     #appCard {
+    #         background-color: #d5d5d5;
+    #         border: 2px solid #BDC3C7;
+    #         border-radius: 10px;
+    #     }
+    #     #appCard:hover {
+    #         background-color: #E0E6E8;
+    #         border: 2px solid #95A5A6;
+    #     }
+    #     QPushButton {
+    #         background-color: #3498DB;
+    #         color: white;
+    #         border: none;
+    #         border-radius: 5px;
+    #         padding: 8px;
+    #         font-weight: bold;
+    #     }
+    #     QPushButton:hover {
+    #         background-color: #2980B9;
+    #     }
+    # """)
+
     self.setStyleSheet("""
-        #appCard {
-            background-color: #d5d5d5;
-            border: 2px solid #BDC3C7;
-            border-radius: 10px;
+        QWidget#appCard {
+            background-color: white;
+            border: 2px solid #0B3D91;
+            border-radius: 12px;
+            padding: 15px;
         }
-        #appCard:hover {
-            background-color: #E0E6E8;
-            border: 2px solid #95A5A6;
+        QWidget#appCard:hover {
+            background-color: #F0F4F8;
+            border: 3px solid #E8B923;
         }
         QPushButton {
-            background-color: #3498DB;
+            background-color: #0B3D91;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px;
+            border-radius: 6px;
+            padding: 10px;
             font-weight: bold;
+            font-size: 12px;
         }
         QPushButton:hover {
-            background-color: #2980B9;
+            background-color: #E8B923;
+            color: #1C2541;
+        }
+        QPushButton:pressed {
+            background-color: #1C2541;
+            color: white;
+        }
+        QFrame#app_image {
+            background-color: white;        /* ← same as card, no separate color */
+            border: none;                         /* ← No border on image frame */
+            border-radius: 8px;
         }
     """)
 
-    # populate background color
-    self.setAutoFillBackground(True)
+     # Set image frame size
+    self.app_image.setFixedSize(220, 220)
 
    # Create layout for app_image frame
     image_layout = QVBoxLayout(self.app_image)

@@ -1,3 +1,6 @@
 __pycache__
 .vscode
 orbihub-venv
+.pytest_cache
+.DS_Store
+orbihub/assets/.DS_Store

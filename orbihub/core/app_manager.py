@@ -71,39 +71,44 @@ def delete_app_files(app_id: str) -> Tuple[bool, str]:
 def uninstall_apps(app_id: str) -> Tuple[bool, str]:
     """Completely uninstall, removing files from disk & database"""
     try:
-      deletion_successful, files_message = delete_app_files(app_id)
-      if not deletion_successful:
-        return (False, f"File deletion failed: {files_message}")
-        
-    remove_installed_apps(app_id)
+        deletion_successful, files_message = delete_app_files(app_id)
 
-    DELETE
+        if not deletion_successful:
+            return (False, f"File deletion failed: {files_message}")
 
-     
+        remove_installed_apps(app_id)
+        logger.info(f"Successfully uninstalled app: {app_id}")
 
+        return (True, f"App '{app_id}' uninstalled successfully")
 
-
-    
-
-    
-      
-      #Error check file deletion unsuccessful 
+    # Error check file deletion unsuccessful
     except Exception as e:
-      logger.error(f"")
+        logger.error(f"Uninstall unsuccessful for {app_id}: {e}")
+        return (False, f"Uninstall failed: {e}")
+
+      
 
 """testing output"""
-# if __name__ == "__main__":
-#     # Test with a small repo
-#     success, message = install_app(
-#         app_id="test-app_manager",
-#         name="Test App",
-#         verison="1.0.0",
-#         repo_url="https://github.com/octocat/Hello-World"  # Small test repo
-#     )
+if __name__ == "__main__":
+    # Test with a small repo
+    success, message = install_app(
+        app_id="test-app_manager",
+        name="Test App",
+        verison="1.0.0",
+        repo_url="https://github.com/octocat/Hello-World"  # Small test repo
+    )
     
-#     print(f"Success: {success}")
-#     print(f"Message: {message}")
+    print(f"Success: {success}")
+    print(f"Message: {message}")
     
-#     # Check if it worked
-#     if success:
-#         print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+    # Check if it worked
+    if success:
+        print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+
+        #checking uninstall function
+        input("\nPress Enter to test uninstall...")
+        print("======Uninstalling Test Application======")
+        success, message = uninstall_apps("test-app-mananger")
+        print(f"Uninstall - Success: {success}")
+        print(f"Uninstall - Message: {message}")
+        

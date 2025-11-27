@@ -60,16 +60,42 @@ def add_installed_app(app_id : str, name : str, version : str, repo_url : str):
   except Exception as e:
     logger.error(f"Error adding app to database: {e}")
     raise # re-raising so install_app knows it failed
+
+
+def remove_installed_apps(app_id : str):
+  """Removes an app from the database"""
+  try:
+    db_path = get_database_file()
+    with sqlite3.connect(db_path) as conn:
+      cursor = conn.cursor()
+      cursor.execute("DELETE FROM installed_apps WHERE app_id = ?", (app_id,))
+      conn.commit()
+      logger.info(f"Successfully removed app: {app_id}")
+  except Exception as e:
+    logger.error(f"Error removing application: {e}")
+    raise
+
+
   
-"""code for testing database"""
+  
+# """code for testing database"""
 # if __name__ == "__main__":
 #   print("Initalizing database...")
 #   init_database()
 
 #   print("\nAdding test app...")
-#   add_installed_app("test-app-logging", "Test App", "1.0.0", "https://github.com/test/app")
+#   add_installed_app("test-app-1", "Test App", "1.0.0", "https://github.com/test/app")
 
-#   print("\nInstalled Apps")
+#   print("\nInstalled Apps [BEFORE] deletion: ")
 #   apps = get_installed_apps()
 #   for app in apps:
 #     print(app)
+
+#   print("\nDeleting Test-app-1 ")
+#   remove_installed_apps("test-app-1")
+
+#   print("\nInstalled apps [AFTER] delete: ")
+#   apps = get_installed_apps()
+#   for app in apps:
+#     print(app)
+#   print(f"Total apps: {len(apps)}")

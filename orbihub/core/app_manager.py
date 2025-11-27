@@ -1,11 +1,12 @@
 from orbihub.utils.paths import get_apps_dir
-from orbihub.core.database import add_installed_app
+from orbihub.core.database import add_installed_app, remove_installed_apps
 from orbihub.utils.checker import check_python_installed, check_git_installed 
 from orbihub.utils.logger import logger
 from pathlib import Path
 import platform
 import subprocess
 from typing import Tuple
+import shutil 
 
 apps_dir = get_apps_dir()
 
@@ -47,20 +48,67 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     
   except subprocess.CalledProcessError as e:
     return (False, f"Installation failed {e}")
+  
+def delete_app_files(app_id: str) -> Tuple[bool, str]:
+  """Deletes app file(s) from disk"""
+  try: 
+    app_path = get_apps_dir() / app_id
+    #Check if app cannot be found or succesfully already deleted
+    if not app_path.exists():
+      logger.warning(f"App folder not found: {app_path}")
+      return (True, "Folder already deleted")
+      
+    #Removal function using shutil 
+    shutil.rmtree(app_path)
+    logger.info(f"Deleted app files: {app_path}")
+    return(True, "File deletion successful")
+    
+  #Error log for unsuccessful deletion 
+  except Exception as e:
+    logger.error(f"Failed to delete app files: {e}")
+    return(False, f"Deletction failed: {e}")
+    
+def uninstall_apps(app_id: str) -> Tuple[bool, str]:
+    """Completely uninstall, removing files from disk & database"""
+    try:
+        deletion_successful, files_message = delete_app_files(app_id)
+
+        if not deletion_successful:
+            return (False, f"File deletion failed: {files_message}")
+
+        remove_installed_apps(app_id)
+        logger.info(f"Successfully uninstalled app: {app_id}")
+
+        return (True, f"App '{app_id}' uninstalled successfully")
+
+    # Error check file deletion unsuccessful
+    except Exception as e:
+        logger.error(f"Uninstall unsuccessful for {app_id}: {e}")
+        return (False, f"Uninstall failed: {e}")
+
+      
 
 """testing output"""
-# if __name__ == "__main__":
-#     # Test with a small repo
-#     success, message = install_app(
-#         app_id="test-app_manager",
-#         name="Test App",
-#         verison="1.0.0",
-#         repo_url="https://github.com/octocat/Hello-World"  # Small test repo
-#     )
+if __name__ == "__main__":
+    # Test with a small repo
+    success, message = install_app(
+        app_id="test-app_manager",
+        name="Test App",
+        verison="1.0.0",
+        repo_url="https://github.com/octocat/Hello-World"  # Small test repo
+    )
     
-#     print(f"Success: {success}")
-#     print(f"Message: {message}")
+    print(f"Success: {success}")
+    print(f"Message: {message}")
     
-#     # Check if it worked
-#     if success:
-#         print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+    # Check if it worked
+    if success:
+        print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+
+        #checking uninstall function
+        input("\nPress Enter to test uninstall...")
+        print("======Uninstalling Test Application======")
+        success, message = uninstall_apps("test-app-mananger")
+        print(f"Uninstall - Success: {success}")
+        print(f"Uninstall - Message: {message}")
+        

@@ -2,6 +2,36 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.6] - 2025-11-27
+
+### Added
+- Aerospace-themed UI design with NASA-inspired color palette
+- Custom app icon support for macOS and Windows
+- PyInstaller build configuration for standalone app distribution
+- Dynamic app card styling with hover effects
+- White card backgrounds with navy blue borders and gold accents
+- Application icon in window title bar and dock
+
+### Changed
+- Updated UI color scheme to aerospace theme (navy #0B3D91, gold #E8B923)
+- Improved app card layout with proper background rendering
+- Set app images to square format (220x220px) for consistent display
+- Enhanced button styling with aerospace color palette
+- Updated main window with dark title bar and professional spacing
+
+### Fixed
+- App card background now renders correctly with WA_StyledBackground attribute
+- Removed unsupported CSS properties (box-shadow) from stylesheets
+- Fixed image aspect ratio distortion in app cards
+- Corrected stylesheet syntax errors (removed Python comments from CSS)
+- Fixed asset path issues for consistent image loading
+
+### Technical
+- Created `orbihub/ui/styles.py` for centralized theme management
+- Preparing PyInstaller configuration for app bundling
+- Added support for .icns icon format on macOS
+
+
 ## [0.1.5] - 2025-11-24
 
 ### Added

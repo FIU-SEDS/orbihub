@@ -124,3 +124,22 @@ Session 4:  (Install apps)
 Session 5: (Features + polish)
 
 ```
+
+## updated timeline
+```bash
+High Priority:
+Connect Install button to app_manager.py
+Connect About/Settings buttons to functions
+Implement search functionality
+Fetch apps from registry (move from hardcoded to dynamic)
+Show installation progress (progress bar, status messages)
+
+Medium Priority:
+6. Uninstall functionality
+7. App launching
+8. Update checking 
+
+Low Priority:
+9. Build PyInstaller executable
+10. User documentation
+```

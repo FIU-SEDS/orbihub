@@ -128,16 +128,16 @@ Session 5: (Features + polish)
 ## updated timeline
 ```bash
 High Priority:
-Connect Install button to app_manager.py
-Connect About/Settings buttons to functions
-Implement search functionality
-Fetch apps from registry (move from hardcoded to dynamic)
-Show installation progress (progress bar, status messages)
+1. Connect Install button to app_manager.py
+2. Connect About/Settings buttons to functions
+3. Show installation progress (progress bar, status messages)
+4. Uninstall functionality
+5. App launching
 
 Medium Priority:
-6. Uninstall functionality
-7. App launching
 8. Update checking 
+9. Implement search functionality
+10. Fetch apps from registry (move from hardcoded to dynamic)
 
 Low Priority:
 9. Build PyInstaller executable

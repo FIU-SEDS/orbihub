@@ -1,5 +1,5 @@
 from orbihub.utils.paths import get_apps_dir
-from orbihub.core.database import add_installed_app, remove_installed_apps
+from orbihub.core.database import add_installed_app, remove_installed_apps, get_installed_apps
 from orbihub.utils.checker import check_python_installed, check_git_installed 
 from orbihub.utils.logger import logger
 from pathlib import Path
@@ -85,6 +85,17 @@ def uninstall_apps(app_id: str) -> Tuple[bool, str]:
     except Exception as e:
         logger.error(f"Uninstall unsuccessful for {app_id}: {e}")
         return (False, f"Uninstall failed: {e}")
+    
+def is_app_installed(app_id: str) -> bool:
+   """checks if an app is already installed"""
+
+   installed_apps = get_installed_apps()
+   for app in installed_apps:
+      if app[1] == app_id:
+         return True
+   return False
+      
+   
 
       
 

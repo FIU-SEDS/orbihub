@@ -4,6 +4,7 @@ from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
 from orbihub.utils.logger import logger
 from orbihub.core.registry import fetch_registry
+from orbihub.core.app_manager import uninstall_app
 
 
 class form_apps(QWidget, Ui_app_template_format):
@@ -21,17 +22,17 @@ class form_apps(QWidget, Ui_app_template_format):
         # link functions to buttons
         self.settings_button.clicked.connect(lambda: self.handle_install())
         self.about_button_3.clicked.connect(lambda: self.handle_about())
-          
+
         # Extract all data from dict
         self.app_data = app_data
-        self.app_id = app_data['id']
-        self.app_name = app_data['name']
-        self.version = app_data['version']
-        self.repo_url = app_data['repo']
-        self.description = app_data['description']
-        self.author = app_data['author']
-        image_path = app_data['image_path']
-    
+        self.app_id = app_data["id"]
+        self.app_name = app_data["name"]
+        self.version = app_data["version"]
+        self.repo_url = app_data["repo"]
+        self.description = app_data["description"]
+        self.author = app_data["author"]
+        image_path = app_data["image_path"]
+
         self.setObjectName("appCard")
 
         # hidden by default until needed
@@ -140,9 +141,24 @@ class form_apps(QWidget, Ui_app_template_format):
         message += f"Author: {self.author}\n\n"
         message += f"App Description: {self.description}\n\n"
         message += f"Repository: {self.repo_url}"
-        
-        QMessageBox.information(
-            self,
-            f"About {self.app_name}",
-            message
-        )
+
+        QMessageBox.information(self, f"About {self.app_name}", message)
+
+    def handle_settings(self):
+        # uninstall directly
+        success, message = uninstall_app(self.app_id)
+
+        # show result
+        if success:
+            self.settings_button.setEnabled(False)
+            self.install_button.setText("Install")
+            self.install_button.setEnabled(True)
+
+            logger.info(f"Successfully deleted {self.app_id}")
+        else:
+            # show error
+            QMessageBox.critical(
+                self,
+                "Uninstall failed",
+                f"Failed to uninstall {self.app_name}: {message}",
+            )

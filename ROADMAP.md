@@ -5,6 +5,94 @@ Transform OrbiHub from a local desktop marketplace into a scalable, cloud-enable
 
 ---
 
+# OrbiHub Development Roadmap
+
+## 🎯 Current Focus (December 2025)
+
+**Sprint:** QThread Implementation + App Launching  
+**Target:** December 22, 2025 - Phase 1 Release (v1.0)
+
+### This Week (Dec 13-20)
+- [ ] Implement `InstallWorker(QThread)` for non-blocking installation
+- [ ] Create `orbihub/ui/workers.py` with worker classes
+- [ ] Update `handle_install()` to use worker thread with signals
+- [ ] Animated progress bar during git clone/venv/pip install
+- [ ] Test installation on all platforms (Mac/Windows/Linux)
+- [ ] Implement `launch_app()` - detect app type, run with subprocess
+- [ ] Change Install → Launch button for installed apps
+
+### Next Week (Dec 21-27)
+- [ ] PyInstaller `.spec` file configuration
+- [ ] Bundle assets with executable
+- [ ] Update `paths.py` for PyInstaller compatibility (`sys._MEIPASS`)
+- [ ] Build and test executable on clean machines
+- [ ] Fix any missing dependencies/assets issues
+
+### Week of Dec 30
+- [ ] Write user documentation (installation, usage, troubleshooting)
+- [ ] Create `docs/APP_DEVELOPER.md` guide
+- [ ] Beta testing with FIU SEDS team (3-5 members)
+- [ ] Bug fixes and polish based on feedback
+- [ ] **Release v1.0 - December 22, 2026**
+
+**NOTE**: would like to release sooner so V.1 can be completed
+---
+
+## Phase 1: Local Foundation (Current - January 2026)
+**Goal:** Stable local desktop application with SQLite backend
+
+### Features
+- [X] PyQt6 desktop interface with aerospace theme
+- [X] Local SQLite database for installed apps
+- [X] Virtual environment management per app (venv + pip)
+- [X] Browse rocketry tools (app cards with images, descriptions)
+- [X] Cross-platform support (Windows, macOS, Linux)
+- [X] Uninstall functionality (Settings button → delete files + DB record)
+- [X] About dialog (display app metadata)
+- [ ] **Install with QThread (non-blocking UI)** ⏳ IN PROGRESS
+- [ ] **App launching capability** ⏳ IN PROGRESS
+- [ ] App dependency resolution (requirements.txt → pip install)
+- [ ] Automatic updates check (v1.1 feature)
+- [X] Basic error handling and logging (file + console)
+
+### Current Status (Dec 13, 2025)
+**Working:**
+- ✅ UI displays app cards from registry
+- ✅ About button shows app information dialog
+- ✅ Settings button uninstalls apps (delete folder + database cleanup)
+- ✅ Database tracks installed apps with timestamps
+- ✅ Logging system (file: `~/.orbihub/logs/orbihub.log` + console)
+- ✅ App installation function (blocks UI - needs QThread)
+
+**In Progress:**
+- 🚧 QThread implementation for non-blocking installation
+- 🚧 Progress bar animation during install
+- 🚧 App launching (subprocess to run installed apps)
+
+**Blocked/Waiting:**
+- ⏸️ Dynamic registry (needs Phase 2 backend API)
+- ⏸️ Search functionality (waiting for more apps)
+- ⏸️ Update checking (needs version comparison logic)
+
+### Technical Stack
+- **Frontend:** PyQt6 (desktop UI)
+- **Database:** SQLite (local file at `~/.orbihub/orbihub.db`)
+- **Package Management:** venv (virtual environments), pip
+- **Version Control:** Git (for app installation)
+- **Distribution:** PyInstaller (standalone executables)
+- **Logging:** Python logging module (file + console handlers)
+
+### Success Criteria
+- [x] 10+ FIU SEDS members actively using OrbiHub
+- [ ] 5+ apps available in local catalog (currently 3 hardcoded)
+- [ ] Stable installation/uninstallation workflow
+- [ ] Zero critical bugs in production use
+- [ ] Executable builds for macOS and Windows
+
+---
+
+[Rest of ROADMAP.md stays the same - Phase 2, 3, 4...]
+
 ## Phase 1: Local Foundation (Current - Q1 2026)
 **Goal:** Stable local desktop application with SQLite backend
 
@@ -12,9 +100,9 @@ Transform OrbiHub from a local desktop marketplace into a scalable, cloud-enable
 - [X] PyQt6 desktop interface
 - [X] Local SQLite database for installed apps
 - [X] Virtual environment management per app
-- [ ] Browse and install rocketry tools (telemetry viewers, flight analyzers, etc.)
+- [X] Browse and install rocketry tools (telemetry viewers, flight analyzers, etc.)
 - [X] Cross-platform support (Windows, macOS, Linux)
-- [ ] App dependency resolution
+- [X] App dependency resolution
 - [ ] Automatic updates check
 - [ ] User preferences/settings persistence (maybe not)
 - [X] Basic error handling and logging

@@ -21,7 +21,7 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
     # print(f"Repo cloned to {apps_dir}")
     logger.info(f"Repo cloned to {app_install_path}")
 
-    # create seperate venv for that app
+    # create separate venv for that app
     venv_path = app_install_path / 'venv'
     subprocess.run(["python", "-m", "venv", str(venv_path)], check=True)
     logger.info("Virtual enviorment created")
@@ -106,7 +106,7 @@ def uninstall_app(app_id: str) -> Tuple[bool, str]:
 #         #checking uninstall function
 #         input("\nPress Enter to test uninstall...")
 #         print("======Uninstalling Test Application======")
-#         success, message = uninstall_apps("test-app-mananger")
+#         success, message = uninstall_apps("test-app-manager")
 #         print(f"Uninstall - Success: {success}")
 #         print(f"Uninstall - Message: {message}")
         

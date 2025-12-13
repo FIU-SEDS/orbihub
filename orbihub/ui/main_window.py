@@ -38,7 +38,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         app_3 = form_apps(apps[2])  # Pass whole dict
         self.ui.appsGrid.addWidget(app_3, 1, 0)
-    
+
         # app_4 = form_apps(apps[4])
         # self.ui.appsGrid.addWidget(app_4, 1, 1)
 

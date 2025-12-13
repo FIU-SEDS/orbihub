@@ -12,24 +12,24 @@ def init_database():
 
         # creating the tables
         """Note to self:
-    SQLite functions:
-    - Auto-incrementing unique ID (1, 2, 3, ...)
-    - Primary key for the table
-    - Unique cant have the same value twice
-    - Not Null must have a value
-    - Timestamp SQLite stores as ISO8601 string
-    """
+            SQLite functions:
+            - Auto-incrementing unique ID (1, 2, 3, ...)
+            - Primary key for the table
+            - Unique cant have the same value twice
+            - Not Null must have a value
+            - Timestamp SQLite stores as ISO8601 string
+        """
         cursor.execute(
             """
-      CREATE TABLE IF NOT EXISTS installed_apps (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        app_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        version TEXT NOT NULL,
-        repo_url TEXT NOT NULL,
-        installed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-      )
-    """
+                CREATE TABLE IF NOT EXISTS installed_apps (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                app_id TEXT UNIQUE NOT NULL,
+                name TEXT NOT NULL,
+                version TEXT NOT NULL,
+                repo_url TEXT NOT NULL,
+                installed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+                )
+            """
         )
         conn.commit()
         conn.close()

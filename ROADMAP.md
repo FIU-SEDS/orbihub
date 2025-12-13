@@ -355,7 +355,7 @@ billing (workspace_id, plan, stripe_customer_id, next_billing_date)
 
 ## Why This Matters
 
-### For You (Career)
+###  (Career)
 - **Full-stack experience:** Desktop (PyQt6) → Backend (FastAPI) → Database (PostgreSQL) → Cloud (AWS/GCP)
 - **Distributed systems:** Multi-tenant architecture, workspace isolation, data security
 - **Real users:** FIU SEDS team, other rocketry clubs
@@ -467,5 +467,5 @@ billing (workspace_id, plan, stripe_customer_id, next_billing_date)
 ---
 
 *Last Updated: November 18, 2025*
-*Maintainer: Eriel, Tomas
+*Maintainer: Eriel, Tomas*
 *Status: Phase 1 (In Progress)*

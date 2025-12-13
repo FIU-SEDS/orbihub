@@ -91,36 +91,7 @@ Transform OrbiHub from a local desktop marketplace into a scalable, cloud-enable
 
 ---
 
-[Rest of ROADMAP.md stays the same - Phase 2, 3, 4...]
-
-## Phase 1: Local Foundation (Current - Q1 2026)
-**Goal:** Stable local desktop application with SQLite backend
-
-### Features
-- [X] PyQt6 desktop interface
-- [X] Local SQLite database for installed apps
-- [X] Virtual environment management per app
-- [X] Browse and install rocketry tools (telemetry viewers, flight analyzers, etc.)
-- [X] Cross-platform support (Windows, macOS, Linux)
-- [X] App dependency resolution
-- [ ] Automatic updates check
-- [ ] User preferences/settings persistence (maybe not)
-- [X] Basic error handling and logging
-
-### Technical Stack
-- **Frontend:** PyQt6
-- **Database:** SQLite (local file)
-- **Package Management:** venv, pip
-- **Distribution:** PyInstaller or similar
-
-### Success Criteria
-- FIU SEDS team successfully using OrbiHub locally
-- At least 5 apps available in catalog
-- Stable installation/uninstallation workflow
-
----
-
-## Phase 2: Central App Repository (Q2-Q3 2026)
+## Phase 2: Central App Repository (Q1-Q2 2026)
 **Goal:** Shared app catalog with centralized metadata, while keeping installations local
 
 ### Features

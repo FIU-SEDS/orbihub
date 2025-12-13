@@ -2,6 +2,23 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.7] - 2025-12-13
+
+### Added
+- Uninstall functionality with file deletion and database cleanup
+- Settings button handler to uninstall apps
+- About button handler to display app information dialog
+
+### Changed
+- Updated `form_apps` constructor to accept full app_data dictionary
+- Settings button now triggers uninstall instead of placeholder
+- Install button text resets to "Install" after uninstall
+
+### Fixed
+- Button states after uninstall (Settings disabled, Install enabled)
+- App card now receives complete app metadata
+
+
 ## [0.1.6] - 2025-11-27
 
 ### Added

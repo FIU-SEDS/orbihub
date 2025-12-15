@@ -22,6 +22,7 @@ class form_apps(QWidget, Ui_app_template_format):
         # link functions to buttons
         self.settings_button.clicked.connect(lambda: self.handle_install())
         self.about_button_3.clicked.connect(lambda: self.handle_about())
+        self.settings_button.clicked.connect(lambda: self.handle_settings())
 
         # Extract all data from dict
         self.app_data = app_data

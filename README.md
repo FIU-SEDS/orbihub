@@ -17,8 +17,58 @@ Modular marketplace platform for high-powered rocketry applications. Downloadabl
 
 </div>
 
-## plan
+## 🎯 current focus (december 2025)
 
+**immediate priority:** QThread implementation for non-blocking installation
+
+### what works ✅
+- PyQt6 desktop UI with aerospace theme
+- SQLite database for tracking installed apps
+- App cards display with images and styling  
+- Uninstall functionality (Settings button)
+- About dialog showing app information
+- Logging system (file + console)
+- Cross-platform path management
+- App installation (blocks UI - being improved)
+
+### in progress 🚧
+- Install button functionality
+- **Install button with QThread** - prevent UI freezing during git clone/venv creation
+- App launching (detect installed apps, run with subprocess)
+- Progress bar animation during installation
+- **Uninstall button with QThread** - also prevents UI freezing
+
+### planned 📋
+- PyInstaller executable build
+- User documentation
+- Search/filter functionality (v1.1)
+- Dynamic app registry from server (v2.0)
+
+see [ROADMAP.md](ROADMAP.md) for long-term vision (phases 2-4)
+
+## phase 1 progress (v1.0 - january 2026)
+
+**completed:**
+- [x] Phase 1: UI working (PyQt6 main window, app cards)
+- [x] Phase 2: Data layer (SQLite database, app registry)
+- [x] Phase 3: Display apps in UI (dynamic card generation)
+- [x] Phase 4: Uninstall functionality with database cleanup
+- [x] Phase 6 partial: theme styling, logging system
+
+**current sprint (week of dec 13):**
+- [ ] QThread for install_app() - prevent UI freeze
+- [ ] Connect Install button to threaded worker
+- [ ] Show animated progress bar during installation
+- [ ] App launching capability
+
+**next sprint (week of dec 20):**
+- [ ] PyInstaller executable for macOS/Windows
+- [ ] User documentation (README, usage guide)
+- [ ] Beta testing with FIU SEDS team
+
+**target:** December 22, 2026 - v1.0 release
+
+## plan
 ```bash
 orbihub-project/
 ├── orbihub/                    # Your source code package
@@ -60,86 +110,3 @@ orbihub-project/
 
 - For utils/ folder:
   Utility functions and helpers for configuration management, logging, validation, and app-wide constants.
-
-## current tasks 2025-11-14
-
-- Tomas: Phase 3 Display Apps in UI
-- Eriel: working on logging functionality for app
-
-## project timeline
-
-```bash
-Development Steps (In Order)
-Phase 1: Get Basic UI Working (DONE)
-Step 1: Convert your .ui file to Python with pyuic6
-Step 2: Create MainWindow class that loads the UI
-Step 3: Update main.py to launch the window
-Step 4: Test that window opens and buttons print messages when clicked
-
-Phase 2: Set Up Data Layer
-Step 5: Create database.py with SQLite tables for installed apps
-Step 6: Test database creation by running the file directly
-Step 7: Create registry.py with hardcoded sample apps list
-Step 8: Test registry by printing sample appsx-
-
-Phase 3: Display Apps in UI
-Step 9: Create AppCard widget class (displays one app)
-Step 10: Update MainWindow to fetch apps from registry
-Step 11: Add app cards to the grid layout dynamically
-Step 12: Test that app cards appear in the window
-
-Phase 4: Implement Installation
-Step 13: Create app_manager.py with git clone function
-Step 14: Connect "Install" button on cards to app_manager
-Step 15: Test installing an app (git clone to ~/.orbihub/apps/)
-Step 16: Save installation record to database
-Step 17: Show success/error messages to user
-
-Phase 5: Add More Features
-Step 18: Implement uninstall functionality (delete folder + database record)
-Step 19: Add search/filter for apps
-Step 20: Add app launching capability
-Step 21: Add update checking for installed apps
-
-Phase 6: Polish & Distribute
-Step 22: Add styling/themes to make it look professional
-Step 23: Add error handling and logging
-Step 24: Create executable with PyInstaller
-Step 25: Test on clean machine
-Step 26: Write user documentation
-Step 27: Release to your club!
-
-Our Current Position: 2025-11-14
-DONE UI designed
-DONE paths.py written
-DONE Phase 1
-DONE Phase 2
-DONE Phase 4
-Next: Start Phase 3 & 5
-
-Session 1: Steps 1-4 (Get window opening)
-Session 2:  (Show apps in UI)
-Session 3:  (Database + registry)
-Session 4:  (Install apps)
-Session 5: (Features + polish)
-
-```
-
-## updated timeline
-```bash
-High Priority:
-1. Connect Install button to app_manager.py
-2. Connect About/Settings buttons to functions
-3. Show installation progress (progress bar, status messages)
-4. Uninstall functionality
-5. App launching
-
-Medium Priority:
-8. Update checking 
-9. Implement search functionality
-10. Fetch apps from registry (move from hardcoded to dynamic)
-
-Low Priority:
-9. Build PyInstaller executable
-10. User documentation
-```

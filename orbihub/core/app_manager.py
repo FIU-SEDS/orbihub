@@ -21,7 +21,7 @@ def install_app(app_id : str, name : str, version : str, repo_url : str) -> Tupl
     # print(f"Repo cloned to {apps_dir}")
     logger.info(f"Repo cloned to {app_install_path}")
 
-    # create seperate venv for that app
+    # create separate venv for that app
     venv_path = app_install_path / 'venv'
     subprocess.run(["python", "-m", "venv", str(venv_path)], check=True)
     logger.info("Virtual enviorment created")
@@ -66,9 +66,9 @@ def delete_app_files(app_id: str) -> Tuple[bool, str]:
   #Error log for unsuccessful deletion 
   except Exception as e:
     logger.error(f"Failed to delete app files: {e}")
-    return(False, f"Deletction failed: {e}")
+    return(False, f"Deletion failed: {e}")
     
-def uninstall_apps(app_id: str) -> Tuple[bool, str]:
+def uninstall_app(app_id: str) -> Tuple[bool, str]:
     """Completely uninstall, removing files from disk & database"""
     try:
         deletion_successful, files_message = delete_app_files(app_id)
@@ -76,11 +76,11 @@ def uninstall_apps(app_id: str) -> Tuple[bool, str]:
         if not deletion_successful:
             return (False, f"File deletion failed: {files_message}")
 
-        remove_installed_apps(app_id)
+        remove_installed_app(app_id)
         logger.info(f"Successfully uninstalled app: {app_id}")
 
         return (True, f"App '{app_id}' uninstalled successfully")
-
+      
     # Error check file deletion unsuccessful
     except Exception as e:
         logger.error(f"Uninstall unsuccessful for {app_id}: {e}")
@@ -94,32 +94,27 @@ def is_app_installed(app_id: str) -> bool:
       if app[1] == app_id:
          return True
    return False
-      
-   
-
-      
-
-"""testing output"""
-if __name__ == "__main__":
-    # Test with a small repo
-    success, message = install_app(
-        app_id="test-app_manager",
-        name="Test App",
-        version="1.0.0",
-        repo_url="https://github.com/octocat/Hello-World"  # Small test repo
-    )
+     
+# """testing output"""
+# if __name__ == "__main__":
+#     # Test with a small repo
+#     success, message = install_app(
+#         app_id="test-app_manager",
+#         name="Test App",
+#         verison="1.0.0",
+#         repo_url="https://github.com/octocat/Hello-World"  # Small test repo
+#     )
     
-    print(f"Success: {success}")
-    print(f"Message: {message}")
+#     print(f"Success: {success}")
+#     print(f"Message: {message}")
     
-    # Check if it worked
-    if success:
-        print(f"\nCheck: {get_apps_dir() / 'test-app'}")
+#     # Check if it worked
+#     if success:
+#         print(f"\nCheck: {get_apps_dir() / 'test-app'}")
 
-        #checking uninstall function
-        input("\nPress Enter to test uninstall...")
-        print("======Uninstalling Test Application======")
-        success, message = uninstall_apps("test-app-mananger")
-        print(f"Uninstall - Success: {success}")
-        print(f"Uninstall - Message: {message}")
-        
+#         #checking uninstall function
+#         input("\nPress Enter to test uninstall...")
+#         print("======Uninstalling Test Application======")
+#         success, message = uninstall_apps("test-app-manager")
+#         print(f"Uninstall - Success: {success}")
+#         print(f"Uninstall - Message: {message}")

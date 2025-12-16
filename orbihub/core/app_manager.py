@@ -10,7 +10,7 @@ import shutil
 
 apps_dir = get_apps_dir()
 
-def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tuple[bool, str]:
+def install_app(app_id : str, name : str, version : str, repo_url : str) -> Tuple[bool, str]:
   if not (check_git_installed() and check_python_installed()):
     return (False, "Git or Python not installed")
       
@@ -41,7 +41,7 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
       logger.info("Dependancies installed successfully")
       
     # save to database
-    add_installed_app(app_id, name, verison, repo_url)
+    add_installed_app(app_id, name, version, repo_url)
     logger.info(f"Installation complete: {app_id}")
 
     return (True, "installation successful")
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     success, message = install_app(
         app_id="test-app_manager",
         name="Test App",
-        verison="1.0.0",
+        version="1.0.0",
         repo_url="https://github.com/octocat/Hello-World"  # Small test repo
     )
     

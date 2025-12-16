@@ -105,13 +105,13 @@ class form_apps(QWidget, Ui_app_template_format):
             success, message = install_app(
                 app_id=self.app_id,
                 name=self.app_name,
-                verison=self.version,
+                version=self.version,
                 repo_url=self.repo_url,
             )
             if success:
                 logger.info(f"Installation successful: {self.app_name}")
                 self.install_button.setText("Installed")
-                
+
                 # Optionally set progress bar to 100 here
 
             else:

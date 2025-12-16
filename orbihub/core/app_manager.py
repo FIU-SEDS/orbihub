@@ -1,5 +1,5 @@
 from orbihub.utils.paths import get_apps_dir
-from orbihub.core.database import add_installed_app, remove_installed_app
+from orbihub.core.database import add_installed_app, remove_installed_apps, get_installed_apps
 from orbihub.utils.checker import check_python_installed, check_git_installed 
 from orbihub.utils.logger import logger
 from pathlib import Path
@@ -10,7 +10,7 @@ import shutil
 
 apps_dir = get_apps_dir()
 
-def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tuple[bool, str]:
+def install_app(app_id : str, name : str, version : str, repo_url : str) -> Tuple[bool, str]:
   if not (check_git_installed() and check_python_installed()):
     return (False, "Git or Python not installed")
       
@@ -41,7 +41,7 @@ def install_app(app_id : str, name : str, verison : str, repo_url : str) -> Tupl
       logger.info("Dependancies installed successfully")
       
     # save to database
-    add_installed_app(app_id, name, verison, repo_url)
+    add_installed_app(app_id, name, version, repo_url)
     logger.info(f"Installation complete: {app_id}")
 
     return (True, "installation successful")
@@ -80,12 +80,21 @@ def uninstall_app(app_id: str) -> Tuple[bool, str]:
         logger.info(f"Successfully uninstalled app: {app_id}")
 
         return (True, f"App '{app_id}' uninstalled successfully")
-
+      
     # Error check file deletion unsuccessful
     except Exception as e:
         logger.error(f"Uninstall unsuccessful for {app_id}: {e}")
         return (False, f"Uninstall failed: {e}")
+    
+def is_app_installed(app_id: str) -> bool:
+   """checks if an app is already installed"""
 
+   installed_apps = get_installed_apps()
+   for app in installed_apps:
+      if app[1] == app_id:
+         return True
+   return False
+     
 # """testing output"""
 # if __name__ == "__main__":
 #     # Test with a small repo
@@ -109,4 +118,3 @@ def uninstall_app(app_id: str) -> Tuple[bool, str]:
 #         success, message = uninstall_apps("test-app-manager")
 #         print(f"Uninstall - Success: {success}")
 #         print(f"Uninstall - Message: {message}")
-        

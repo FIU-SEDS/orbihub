@@ -1,5 +1,5 @@
 # Form implementation generated from reading ui file 'orbihub/ui/apps_template/app_template.ui'
-#
+
 # Created by: PyQt6 UI code generator 6.10.0
 #
 # WARNING: Any manual changes made to this file will be lost when pyuic6 is

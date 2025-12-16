@@ -3,8 +3,8 @@ from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QMessageBox
 from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
 from orbihub.utils.logger import logger
+from orbihub.core.app_manager import uninstall_apps, install_app
 from orbihub.core.registry import fetch_registry
-from orbihub.core.app_manager import uninstall_app
 
 
 class form_apps(QWidget, Ui_app_template_format):
@@ -13,14 +13,13 @@ class form_apps(QWidget, Ui_app_template_format):
 
     Class sets up the Ui for the home page and initializes the components defined in the Ui file
     """
-
     def __init__(self, app_data: dict):
         """sets up the ui file to display in the application"""
         super().__init__()
         self.setupUi(self)
-
+        
         # link functions to buttons
-        self.settings_button.clicked.connect(lambda: self.handle_install())
+        self.install_button.clicked.connect(lambda: self.handle_install())
         self.about_button_3.clicked.connect(lambda: self.handle_about())
         self.settings_button.clicked.connect(lambda: self.handle_settings())
 
@@ -39,37 +38,12 @@ class form_apps(QWidget, Ui_app_template_format):
         # hidden by default until needed
         self.progress_bar.setVisible(False)
 
-        # Force Qt to draw the styled background
         self.setAttribute(
             Qt.WidgetAttribute.WA_StyledBackground, True
         )  # rendering background color for entire widget not just child elements
 
-        # Style this specific widget
-        # self.setStyleSheet("""
-        #     #appCard {
-        #         background-color: #d5d5d5;
-        #         border: 2px solid #BDC3C7;
-        #         border-radius: 10px;
-        #     }
-        #     #appCard:hover {
-        #         background-color: #E0E6E8;
-        #         border: 2px solid #95A5A6;
-        #     }
-        #     QPushButton {
-        #         background-color: #3498DB;
-        #         color: white;
-        #         border: none;
-        #         border-radius: 5px;
-        #         padding: 8px;
-        #         font-weight: bold;
-        #     }
-        #     QPushButton:hover {
-        #         background-color: #2980B9;
-        #     }
-        # """)
-
         self.setStyleSheet(
-            """
+        """
         QWidget#appCard {
             background-color: white;
             border: 2px solid #0B3D91;
@@ -102,8 +76,7 @@ class form_apps(QWidget, Ui_app_template_format):
             border: none;                         /* ← No border on image frame */
             border-radius: 8px;
         }
-    """
-        )
+        """)
 
         # Set image frame size
         self.app_image.setFixedSize(220, 220)
@@ -131,9 +104,38 @@ class form_apps(QWidget, Ui_app_template_format):
 
         app_list = fetch_registry()
 
-    # TODO: Implement handle_install() here
+        
     def handle_install(self):
-        pass
+        """Handles install button click"""
+        logger.info(f"Attempting to install: {self.app_name}")
+
+        # Prevent user from double clicking 'install' button
+        self.install_button.setEnabled(False)
+        self.install_button.setText("Installing...")
+
+        try:
+            success, message = install_app(
+                app_id=self.app_id,
+                name=self.app_name,
+                version=self.version,
+                repo_url=self.repo_url,
+            )
+            if success:
+                logger.info(f"Installation successful: {self.app_name}")
+                self.install_button.setText("Installed")
+
+                # Optionally set progress bar to 100 here
+
+            else:
+                logger.error(f"Installation failed: {message}")
+                self.install_button.setEnabled(True)
+                self.install_button.setText("Install")
+
+        except Exception as e:
+            logger.error(f"Error during install of {self.app_name}: {e}")
+            self.install_button.setEnabled(True)
+            self.install_button.setText("Install")
+
 
     def handle_about(self):
         message = f"{self.app_name}\n"
@@ -145,6 +147,7 @@ class form_apps(QWidget, Ui_app_template_format):
 
         QMessageBox.information(self, f"About {self.app_name}", message)
 
+        
     def handle_settings(self):
         # uninstall directly
         success, message = uninstall_app(self.app_id)

@@ -114,6 +114,20 @@ orbihub-project/
 
 ## 📦 Installation
 
+## Prerequisites
+Before you begin, you will need to have Conda installed
+
+### Installing Conda 
+If you don't have Conda installed, download and install either:
+- **[Anaconda](https://www.anaconda.com/products/distribution)** (Includes many pre-installed packages)
+- **[Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)** (Only includes Conda & Python)
+
+** Verify Installation: **
+```bash
+conda --verison
+```
+
+
 ### 1. Clone the Repository:
 ```bash
 git clone https://github.com/FIU-SEDS/orbihub.git 

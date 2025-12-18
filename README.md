@@ -142,3 +142,18 @@ conda create -n orbihub python =3.13
 ### 3. Activate the Enviornment
 ```bash
 conda activate orbihub
+```
+
+### 4. Install Dependencies
+
+Install the required packages:
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run the application
+```bash
+python -m orbihub
+```
+
+

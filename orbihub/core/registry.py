@@ -11,7 +11,7 @@ sample_apps =[
     "author": "FIU SEDS"
   },
   {
-   "id": "rocket-calculator",
+   "id": "rocketcalc",
     "name": "Rocket Calculator",
     "description": "Calculator to calculate snatch force, ejection force, etc",
     "version": "1.0.0",
@@ -26,6 +26,15 @@ sample_apps =[
     "version": "1.0.0",
     "repo": "https://github.com/fiu-seds/flight-data-analyzer",
     "author": "FIU SEDS"
+  },
+  {
+    "id": "calculator",  # ← Add this one
+    "name": "PySide6 Calculator",
+    "description": "Simple calculator app for testing OrbiHub installation",
+    "version": "1.0.0",
+    "repo": "https://github.com/erielC/pyside6-calculator",
+    "author": "Test",
+    "image": "calculator_logo.png"  # Reuse calculator image
   }
 ]
 

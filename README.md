@@ -156,4 +156,56 @@ pip install -r requirements.txt
 python -m orbihub
 ```
 
+## creating apps for orbihub
 
+### required structure
+
+All apps must follow this structure to work with OrbiHub:
+```
+your-app/
+├── __main__.py          # Entry point (REQUIRED)
+├── requirements.txt     # Dependencies (REQUIRED)
+├── README.md            # Documentation (recommended)
+└── your-app/            # Package folder (optional)
+    └── ...
+```
+
+### requirements
+
+**1. Entry Point (`__main__.py` at root)**
+- Must be at the root level of your repository
+- This file is executed when users click "Launch"
+- Can import from subdirectories/packages
+
+**Example `__main__.py`:**
+```python
+from your_app.main import run
+
+if __name__ == "__main__":
+    run()
+```
+
+**2. Dependencies (`requirements.txt`)**
+- List all Python dependencies
+- Will be installed in isolated virtual environment
+- Standard pip format
+
+**Example `requirements.txt`:**
+```
+PySide6>=6.6.0
+numpy>=1.24.0
+```
+
+**3. Repository Structure**
+
+OrbiHub will:
+1. Clone your repository to `~/.orbihub/apps/{app-id}/`
+2. Create a virtual environment
+3. Install dependencies from `requirements.txt`
+4. Run `__main__.py` when launching
+
+### example app
+
+See [pyside6-calculator](https://github.com/erielC/pyside6-calculator) for a complete example.
+
+---

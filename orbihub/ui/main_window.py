@@ -27,7 +27,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         apps[0]["image_path"] = get_image_path("dashboard_logo.png")
         apps[1]["image_path"] = get_image_path("analyer_logo.png")
         apps[2]["image_path"] = get_image_path("calculator_logo.png")
-        # apps[3]["image_path"] = get_image_path("ground.png")
+        apps[3]["image_path"] = get_image_path("ground.png")
 
         # appsGrid is already a QGridLayout, so you can directly add widgets to it
         app_1 = form_apps(apps[0])  # Pass whole dict
@@ -39,8 +39,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         app_3 = form_apps(apps[2])  # Pass whole dict
         self.ui.appsGrid.addWidget(app_3, 1, 0)
 
-        # app_4 = form_apps(apps[4])
-        # self.ui.appsGrid.addWidget(app_4, 1, 1)
+        app_4 = form_apps(apps[3])
+        self.ui.appsGrid.addWidget(app_4, 1, 1)
 
 
     def search_apps(self):

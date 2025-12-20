@@ -1,3 +1,4 @@
+# from archive.db_test import cursor
 from orbihub.utils.paths import get_database_file
 from orbihub.utils.logger import logger
 from typing import List, Tuple
@@ -82,7 +83,18 @@ def remove_installed_app(app_id: str) -> Tuple[bool, str]:
         logger.error(f"Error removing application: {e}")
         return (False, f"Database error: {e}")
 
-
+def is_app_installed(app_id: str) -> bool:
+    """Checks if an app is installed"""
+    try:
+        db_path = get_database_file()
+        with sqlite3.connect(db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM installed_apps WHERE app_id = ?", (app_id,))
+            result = cursor.fetchone()
+            return result is not None
+    except Exception as e:
+        logger.error(f"Error checking if app installed: {e}")
+        return False
 # """code for testing database"""
 # if __name__ == "__main__":
 #   print("Initalizing database...")

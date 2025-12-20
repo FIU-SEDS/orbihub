@@ -3,9 +3,8 @@ from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QMessageBox
 from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
 from orbihub.utils.logger import logger
-from orbihub.core.app_manager import uninstall_apps, install_app
+from orbihub.core.app_manager import uninstall_app, install_app, app_launch
 from orbihub.core.registry import fetch_registry
-
 
 class form_apps(QWidget, Ui_app_template_format):
     """
@@ -104,37 +103,61 @@ class form_apps(QWidget, Ui_app_template_format):
 
         app_list = fetch_registry()
 
-        
-    def handle_install(self):
-        """Handles install button click"""
-        logger.info(f"Attempting to install: {self.app_name}")
+    def handle_launch(self):
+        """Launch installed app"""
+        logger.info(f"Launching {self.app_name}...")
 
-        # Prevent user from double clicking 'install' button
-        self.install_button.setEnabled(False)
-        self.install_button.setText("Installing...")
+        success, message = app_launch(self.app_id)
 
-        try:
-            success, message = install_app(
-                app_id=self.app_id,
-                name=self.app_name,
-                version=self.version,
-                repo_url=self.repo_url,
+        if success:
+            logger.info(f"Successfully launched {self.app_name}")
+        else:
+            QMessageBox.information(
+                self,
+                "Launch App",
+                f"Launching {self.app_name}...\n(Not implemented yet)"
             )
-            if success:
-                logger.info(f"Installation successful: {self.app_name}")
-                self.install_button.setText("Installed")
 
-                # Optionally set progress bar to 100 here
 
-            else:
-                logger.error(f"Installation failed: {message}")
+
+    def handle_install(self):
+        """Handles install OR launch button click"""
+        # Check what the button currently says
+        button_text = self.install_button.text()
+
+        if button_text == "Launch":
+            # App is already installed - launch it
+            self.handle_launch()
+        else:
+            logger.info(f"Attempting to install: {self.app_name}")
+
+            # Prevent user from double clicking 'install' button
+            self.install_button.setEnabled(False)
+            self.install_button.setText("Installing...")
+
+            try:
+                success, message = install_app(
+                    app_id=self.app_id,
+                    name=self.app_name,
+                    version=self.version,
+                    repo_url=self.repo_url,
+                )
+                if success:
+                    logger.info(f"Installation successful: {self.app_name}")
+                    self.install_button.setText("Launch")
+                    self.install_button.setEnabled(True)
+                    self.settings_button.setEnabled(True)
+                    # Optionally set progress bar to 100 here
+
+                else:
+                    logger.error(f"Installation failed: {message}")
+                    self.install_button.setEnabled(True)
+                    self.install_button.setText("Install")
+
+            except Exception as e:
+                logger.error(f"Error during install of {self.app_name}: {e}")
                 self.install_button.setEnabled(True)
                 self.install_button.setText("Install")
-
-        except Exception as e:
-            logger.error(f"Error during install of {self.app_name}: {e}")
-            self.install_button.setEnabled(True)
-            self.install_button.setText("Install")
 
 
     def handle_about(self):

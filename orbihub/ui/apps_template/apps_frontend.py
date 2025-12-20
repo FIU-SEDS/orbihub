@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QMessageBox
 from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
 from orbihub.utils.logger import logger
+from orbihub.core.database import add_installed_app, is_app_installed
 from orbihub.core.app_manager import uninstall_app, install_app, app_launch
 from orbihub.core.registry import fetch_registry
 
@@ -103,6 +104,18 @@ class form_apps(QWidget, Ui_app_template_format):
 
         app_list = fetch_registry()
 
+    
+        # Check if already installed
+        installed = is_app_installed(self.app_id)
+        
+        if installed:
+            self.install_button.setText("Launch")
+            self.settings_button.setEnabled(True)
+        else:
+            self.install_button.setText("Install")
+            self.settings_button.setEnabled(False)
+
+
     def handle_launch(self):
         """Launch installed app"""
         logger.info(f"Launching {self.app_name}...")
@@ -144,6 +157,7 @@ class form_apps(QWidget, Ui_app_template_format):
                 )
                 if success:
                     logger.info(f"Installation successful: {self.app_name}")
+                    add_installed_app(self.app_id, self.app_name, self.version, self.repo_url)
                     self.install_button.setText("Launch")
                     self.install_button.setEnabled(True)
                     self.settings_button.setEnabled(True)

@@ -2,6 +2,34 @@
 
 All notable changes to OrbiHub will be documented in this file.
 
+## [0.1.8] - 2025-12-20
+
+### Added
+- App launching functionality - installed apps can now be launched
+- Launch button state management (Install ↔ Launch)
+- Entry point detection for `__main__.py` at app root
+- Non-blocking subprocess execution with `Popen()` for app launching
+- Installation persistence across OrbiHub restarts
+- Database check on startup to restore button states
+
+### Changed
+- Install button now changes to "Launch" after successful installation
+- Settings button enabled only when app is installed
+- Uninstall now properly resets button to "Install" state
+- Database uses `INSERT OR REPLACE` to handle duplicate installations gracefully
+
+### Fixed
+- Button states now persist after closing and reopening OrbiHub
+- App installation detects and cleans orphaned folders
+- Database UNIQUE constraint errors handled properly
+- Virtual environment Python executable correctly located for app launching
+
+### Technical
+- Apps must have `__main__.py` at repository root
+- Apps must have `requirements.txt` for dependencies
+- Each app runs in isolated virtual environment
+- Launch uses subprocess.Popen() for non-blocking execution
+
 ## [0.1.7] - 2025-12-13
 
 ### Added

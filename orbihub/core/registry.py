@@ -32,7 +32,7 @@ sample_apps =[
     "name": "PySide6 Calculator",
     "description": "Simple calculator app for testing OrbiHub installation",
     "version": "1.0.0",
-    "repo": "https://github.com/ercabrer/pyside6-calculator",
+    "repo": "https://github.com/erielC/pyside6-calculator",
     "author": "Test",
     "image": "calculator_logo.png"  # Reuse calculator image
   }

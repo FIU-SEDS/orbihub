@@ -136,7 +136,7 @@ git clone https://github.com/FIU-SEDS/orbihub.git
 ### 2. Create a Conda Enviornment:
 Create a conda enviornment using the required dependencies: 
 ```bash
-conda create -n orbihub python =3.13
+conda create -n orbihub python
 ```
 
 ### 3. Activate the Enviornment

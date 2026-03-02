@@ -34,6 +34,7 @@ def install_app(
             logger.warning(f"Found orphaned app folder, removing: {app_install_path}")
             shutil.rmtree(app_install_path)
         
+        
         # git clone
         app_install_path = get_apps_dir() / app_id
         subprocess.run(["git", "clone", repo_url, str(app_install_path)], check=True)
@@ -136,7 +137,8 @@ def app_launch(app_id: str) -> Tuple[bool, str]:
 
         if not app_path.exists():
             return (False, f"App folder not found: {app_path}")
-
+        
+        
         # assuming we use apps that have the __main__.py entry point
         app_venv_path = app_path / "venv"
         if platform.system() == "Windows":
@@ -162,6 +164,9 @@ def app_launch(app_id: str) -> Tuple[bool, str]:
             cwd=str(app_path),  # Working directory is app folder
         )
 
+        if not python_path.exists():
+            return ("False, fVirtual enviornment not found for '{app_id}', try reinstalling.")
+        
         logger.info(f"Launched {app_id} from {entry_point}")
 
         return (True, "App launched")

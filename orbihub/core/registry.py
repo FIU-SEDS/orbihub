@@ -36,6 +36,15 @@ sample_apps =[
     "author": "Test",
     "image": "calculator_logo.png"  # Reuse calculator image
   }
+  {
+    "id": 'flight-analysis-tool',
+    "name":"Orion",
+    "description": "Easy analysis and review of post launch data",
+    "version": "1.0.0",
+    "repo": "https://github.com/tomasmej/Flight-Analysis-Tool/tree/main",
+    "author": "Carlos Diaz",
+    "image": "flight_analysis_logo.png"
+  }
 ]
 
 # function to return apps

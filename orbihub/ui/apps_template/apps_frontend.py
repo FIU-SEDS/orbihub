@@ -125,10 +125,10 @@ class form_apps(QWidget, Ui_app_template_format):
         if success:
             logger.info(f"Successfully launched {self.app_name}")
         else:
-            QMessageBox.information(
+            QMessageBox.critical(
                 self,
-                "Launch App",
-                f"Launching {self.app_name}...\n(Not implemented yet)"
+                "Launch failed",
+                f"Failed to launch {self.app_name}:\n {message}"
             )
 
 

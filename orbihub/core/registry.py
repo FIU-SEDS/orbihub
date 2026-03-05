@@ -4,28 +4,12 @@ from orbihub.utils.logger import logger
 sample_apps =[
   {
     "id": "telemetry-viewer",
-    "name": "Live Telemetry Viewer",
+    "name": "Orbiview",
     "description": "Real-time rocket telemetry monitoring",
     "version": "1.0.0",
-    "repo": "https://github.com/fiu-seds/telemetry-viewer",
-    "author": "FIU SEDS"
-  },
-  {
-   "id": "rocketcalc",
-    "name": "Rocket Calculator",
-    "description": "Calculator to calculate snatch force, ejection force, etc",
-    "version": "1.0.0",
-    "repo": "https://github.com/fiu-seds/rocket-calculator",
-
-    "author": "FIU SEDS"
-  },
-  {
-    "id": "flight-data-analyzer",
-    "name": "Post Flight Data Analyzer",
-    "description": "Can review and playback past flight data",
-    "version": "1.0.0",
-    "repo": "https://github.com/fiu-seds/flight-data-analyzer",
-    "author": "FIU SEDS"
+    "repo": "https://github.com/FIU-SEDS/Orbiview",
+    "author": "Tomas Mejia",
+    "image": "dashboard_logo.png"
   },
   {
     "id": "calculator",  # ← Add this one
@@ -35,13 +19,13 @@ sample_apps =[
     "repo": "https://github.com/erielC/pyside6-calculator",
     "author": "Test",
     "image": "calculator_logo.png"  # Reuse calculator image
-  }
+  },
   {
     "id": 'flight-analysis-tool',
     "name":"Orion",
     "description": "Easy analysis and review of post launch data",
     "version": "1.0.0",
-    "repo": "https://github.com/tomasmej/Flight-Analysis-Tool/tree/main",
+    "repo": "https://github.com/tomasmej/Flight-Analysis-Tool",
     "author": "Carlos Diaz",
     "image": "flight_analysis_logo.png"
   }

@@ -23,26 +23,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         apps = fetch_registry()
 
-        # Add image paths to each app
-        apps[0]["image_path"] = get_image_path("dashboard_logo.png")
-        apps[1]["image_path"] = get_image_path("analyer_logo.png")
-        apps[2]["image_path"] = get_image_path("calculator_logo.png")
-        apps[3]["image_path"] = get_image_path("ground.png")
-
-        # appsGrid is already a QGridLayout, so you can directly add widgets to it
-        app_1 = form_apps(apps[0])  # Pass whole dict
-        self.ui.appsGrid.addWidget(app_1, 0, 0)
-
-        app_2 = form_apps(apps[1])  # Pass whole dict
-        self.ui.appsGrid.addWidget(app_2, 0, 1)
-
-        app_3 = form_apps(apps[2])  # Pass whole dict
-        self.ui.appsGrid.addWidget(app_3, 1, 0)
-
-        app_4 = form_apps(apps[3])
-        self.ui.appsGrid.addWidget(app_4, 1, 1)
-
-
+        # automatically add app into interface
+        for index, app in enumerate(apps):
+            app["image_path"] = get_image_path(app["image"])
+            card = form_apps(app)
+            row = index // 2
+            col = index & 2
+            self.ui.appsGrid.addWidget(card, row, col)
+            
     def search_apps(self):
         query = self.ui.searchLineEdit.text()
         print(f"Searching for: {query}")

@@ -11,7 +11,7 @@ import platform
 import subprocess
 from typing import Tuple
 import shutil
-from tqdm import tqdm
+
 
 
 apps_dir = get_apps_dir()

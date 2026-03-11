@@ -26,15 +26,14 @@ def install_app(
         if is_app_installed(app_id):
             logger.warning(f"App {app_id} is already installed")
             return (False, "App is already installed. Uninstall first.")
-        
+
         app_install_path = get_apps_dir() / app_id
-        
+
         # Check if folder exists (orphaned from incomplete install)
         if app_install_path.exists():
             logger.warning(f"Found orphaned app folder, removing: {app_install_path}")
             shutil.rmtree(app_install_path)
-        
-        
+
         # git clone
         app_install_path = get_apps_dir() / app_id
         subprocess.run(["git", "clone", repo_url, str(app_install_path)], check=True)
@@ -82,7 +81,10 @@ def delete_app_files(app_id: str) -> Tuple[bool, str]:
             return (True, "Folder already deleted")
 
         # Removal function using shutil
-        shutil.rmtree(app_path)
+        try:
+            shutil.rmtree(app_path)
+        except PermissionError:
+            subprocess.run(f'rmdir /s /q "{app_path}"', shell=True)
         logger.info(f"Deleted app files: {app_path}")
         return (True, "File deletion successful")
 
@@ -137,8 +139,7 @@ def app_launch(app_id: str) -> Tuple[bool, str]:
 
         if not app_path.exists():
             return (False, f"App folder not found: {app_path}")
-        
-        
+
         # assuming we use apps that have the __main__.py entry point
         app_venv_path = app_path / "venv"
         if platform.system() == "Windows":
@@ -165,8 +166,8 @@ def app_launch(app_id: str) -> Tuple[bool, str]:
         )
 
         if not python_path.exists():
-            return ("False, fVirtual enviornment not found for '{app_id}', try reinstalling.")
-        
+            return "False, fVirtual enviornment not found for '{app_id}', try reinstalling."
+
         logger.info(f"Launched {app_id} from {entry_point}")
 
         return (True, "App launched")

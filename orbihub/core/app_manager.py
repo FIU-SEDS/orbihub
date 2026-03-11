@@ -11,6 +11,8 @@ import platform
 import subprocess
 from typing import Tuple
 import shutil
+from tqdm import tqdm
+
 
 apps_dir = get_apps_dir()
 
@@ -175,6 +177,9 @@ def app_launch(app_id: str) -> Tuple[bool, str]:
     except Exception as e:
         logger.error(f"Failed to launch app {app_id}: {e}")
         return (False, f"Launch failed: {e}")
+ 
+   
+
 
 
 # """testing output"""

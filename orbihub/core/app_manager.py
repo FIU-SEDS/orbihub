@@ -99,6 +99,11 @@ def delete_app_files(app_id: str) -> Tuple[bool, str]:
 def uninstall_app(app_id: str) -> Tuple[bool, str]:
     """Completely uninstall, removing files from disk & database"""
     try:
+
+        
+
+
+
         deletion_successful, files_message = delete_app_files(app_id)
 
         if not deletion_successful:

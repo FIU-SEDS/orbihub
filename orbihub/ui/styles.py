@@ -108,4 +108,11 @@ QStatusBar {
     background-color: #1C2541;
     color: white;
 }
+
+/* Settings Dialog */
+*[dialogIcon="large"] {
+    font-size: 60px;
+}
+
+
 """

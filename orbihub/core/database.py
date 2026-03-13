@@ -36,7 +36,7 @@ def init_database():
         conn.close()
         logger.info("Database created successfully")
     except Exception as e:
-        logger.error(f"Database initlization error: {e}")
+        logger.error(f"Database initialization error: {e}")
         raise  # re-raising so caller is aware it failed
 
 

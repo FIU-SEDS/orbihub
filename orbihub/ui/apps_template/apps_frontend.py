@@ -1,13 +1,12 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QMessageBox
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QMessageBox, QDialog
 from PyQt6.QtGui import QPixmap
 from orbihub.ui.apps_template.ui_app_template import Ui_app_template_format
 from orbihub.utils.logger import logger
 from orbihub.core.database import add_installed_app, is_app_installed
 from orbihub.core.app_manager import uninstall_app, install_app, app_launch
 from orbihub.core.registry import fetch_registry
-from orbihub.core.install_worker import InstallWorker
-from PyQt6.QtCore import QThread
+from orbihub.ui.settings_dialog import SettingsDialog
 
 class form_apps(QWidget, Ui_app_template_format):
     """
@@ -219,19 +218,35 @@ class form_apps(QWidget, Ui_app_template_format):
         
     def handle_settings(self):
         # uninstall directly
-        success, message = uninstall_app(self.app_id)
 
-        # show result
-        if success:
+        print("settings clicked")
+        self.settings_dialog = SettingsDialog(self.app_id, self.app_name, self)
+        app_deleted = self.settings_dialog.exec()
+
+        if app_deleted == QDialog.DialogCode.Accepted:
+            data = self.settings_dialog.get_uninstall_results()
             self.settings_button.setEnabled(False)
             self.install_button.setText("Install")
             self.install_button.setEnabled(True)
 
             logger.info(f"Successfully deleted {self.app_id}")
-        else:
-            # show error
-            QMessageBox.critical(
-                self,
-                "Uninstall failed",
-                f"Failed to uninstall {self.app_name}: {message}",
-            )
+
+
+
+
+        # success, message = uninstall_app(self.app_id)
+
+        # # show result
+        # if success:
+        #     self.settings_button.setEnabled(False)
+        #     self.install_button.setText("Install")
+        #     self.install_button.setEnabled(True)
+
+        #     logger.info(f"Successfully deleted {self.app_id}")
+        # else:
+        #     # show error
+        #     QMessageBox.critical(
+        #         self,
+        #         "Uninstall failed",
+        #         f"Failed to uninstall {self.app_name}: {message}",
+        #     )

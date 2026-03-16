@@ -38,7 +38,7 @@ def install_app(
 
         # git clone
         app_install_path = get_apps_dir() / app_id
-        subprocess.run(["git", "clone", repo_url, str(app_install_path)], check=True)
+        subprocess.run(["git", "clone", "--progress", repo_url, str(app_install_path)], check=True, stderr=subprocess.PIPE) 
         # print(f"Repo cloned to {apps_dir}")
         logger.info(f"Repo cloned to {app_install_path}")
 

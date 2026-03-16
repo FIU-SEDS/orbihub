@@ -6,6 +6,8 @@ from orbihub.utils.logger import logger
 from orbihub.core.database import add_installed_app, is_app_installed
 from orbihub.core.app_manager import uninstall_app, install_app, app_launch
 from orbihub.core.registry import fetch_registry
+from orbihub.core.install_worker import InstallWorker
+from PyQt6.QtCore import QThread
 
 class form_apps(QWidget, Ui_app_template_format):
     """
@@ -147,6 +149,36 @@ class form_apps(QWidget, Ui_app_template_format):
             # Prevent user from double clicking 'install' button
             self.install_button.setEnabled(False)
             self.install_button.setText("Installing...")
+            self.progress_bar.setVisible(True)
+            self.progress_bar.setValue(0)
+            
+            #creating worker and thread
+            self.thread = QThread()
+            self.worker = InstallWorker(self.app_id, self.app_name, self.version, self.repo_url)
+            self.worker.moveToThread(self.thread)
+            
+            #connect signal 
+            self.thread.started.connect(self.worker.run)
+            self.worker.progress.connect(self.progress_bar.setValue)
+            self.worker.finished.connect(self.on_installed_finished)
+            self.worker.finished.connect(self.thread.quit)
+            self.worker.finished.connect(self.worker.deleteLater)
+            self.worker.finished.connect(self.thread.deleteLater)
+            
+            self.thread.start()
+            
+    def on_installed_finished(self, success: bool, message: str):
+        self.progress_bar.setVisible(False)
+        if success:
+            logger.info(f"Installation successful: {self.app_name}")
+            self.install_button.setText("Launch")
+            self.install_button.setEnabled(True)
+            self.settings_button.setEnabled(True)
+        else: 
+            logger.info(f"Installation failed: {message}")
+            self.install_button.setText("Install")
+            self.install_button.setEnabled(True)
+            QMessageBox.critical(self, "Install Failed", f"Failed to install {self.app_name}: \n{message}")
 
             try:
                 success, message = install_app(

@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal, QObject
 from orbihub.core.app_manager import install_app
 from orbihub.utils.paths import get_apps_dir
 from orbihub.utils.logger import logger
@@ -7,7 +7,7 @@ import platform
 import re 
 
 class InstallWorker(QObject): 
-    progress = pyqtSignal(100)
+    progress = pyqtSignal(int)
     status = pyqtSignal(str) #emits a status message
     finished = pyqtSignal(bool, str) 
     
@@ -64,17 +64,17 @@ class InstallWorker(QObject):
     def _git_clone(self, app_install_path: Path) -> bool:
         try: 
             process = subprocess.Popen(
-                ["git", "clone", "--progress", self.repo_url, str(app_install_path)]
+                ["git", "clone", "--progress", self.repo_url, str(app_install_path)],
                 stderr=subprocess.PIPE, 
                 text = True
             )
             
             for line in process.stderr:
                 line = line.strip()
-                match = re.search(f"Recieving objects:\s+(\d+)", line)
-                if match: 
+                match = re.search(r"Receiving objects:\s+(\d+)%", line)
+                if match:
                     percent = int(match.group(1))
-                    #scaling range from 5 - 55
+                    # scaling range from 5 - 55
                     scaled = 5 + int(percent * 0.5)
                     self.progress.emit(scaled)
                     

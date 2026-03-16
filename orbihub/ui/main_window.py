@@ -27,8 +27,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for index, app in enumerate(apps):
             app["image_path"] = get_image_path(app["image"])
             card = form_apps(app)
+        #alternates between column 0 & 1 using remainder
             row = index // 2
-            col = index & 2
+            col = index % 2
             self.ui.appsGrid.addWidget(card, row, col)
             
     def search_apps(self):

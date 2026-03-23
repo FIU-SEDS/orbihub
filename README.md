@@ -14,6 +14,7 @@ Modular marketplace platform for high-powered rocketry applications. Downloadabl
 
 <a href="https://github.com/erielC"><img src="https://img.shields.io/badge/maintainer-erielC-blue"></a>
 <a href="https://github.com/tomasmej"><img src="https://img.shields.io/badge/maintainer-tomasmej-blue"></a>
+<a href = https://github.com/carlos-manuel-diaz><img src = https://img.shields.io/badge/maintainer-carlos_manuel_diaz-blue></a>
 
 </div>
 
